@@ -1,12 +1,19 @@
 import dotenv from "dotenv";
-import express from "express";
+import express, { json } from "express";
 import chalk from "chalk";
+import cors from "cors";
+
+import categoriesRouter from "./routes/categoriesRouter.js";
+import gamesRouter from "./routes/gamesRouter.js"
 
 dotenv.config()
 
 const app = express();
 app.use(cors());
 app.use(json());
+
+app.use(categoriesRouter);
+app.use(gamesRouter);
 
 app.listen( process.env.PORT, () => {
     console.log(chalk.bold.green(`Server is good to go on ${process.env.PORT}`))
